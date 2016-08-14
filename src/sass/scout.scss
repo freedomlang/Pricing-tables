@@ -1,0 +1,114 @@
+
+$colors-index: #00CE7F #35A7FF #FF5964;
+$border-default: #eee;
+$price-width: 250px;
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.scout {
+    h3 {
+        text-align: center;
+    }
+}
+
+@each $color in $colors-index{
+    .color-#{index($colors-index,$color)} {
+        border-color: $color;
+        .buy {
+            background-color: $color;
+        }
+    }
+}
+
+.per-price {
+    position: relative;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 1.5em;
+    border-right: 1px solid $border-default;
+    border-left: 1px solid $border-default;
+    border-bottom: 1px solid $border-default;
+    width: $price-width;
+    float: left;
+    margin-left: 10px;
+    .price-container {
+        position: absolute;
+        top: 2em;
+        right: 1.5em;
+        .price {
+            line-height: 1;
+            font-size: 3em;
+            position: relative;
+            &:before{
+                content: attr(data-unit);
+                font-size: 0.5em;
+                font-style: italic;
+                display: inline-block;
+                height: 100%;
+                vertical-align: top;
+                padding-right: 0.2em;
+                color: #444;
+            }
+            &:after {
+                content: attr(data-des);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                font-size: 0.3em;
+                text-align: center;
+                color: #999;
+            }
+        }
+    }
+    .main-des {
+        margin-top: 3.3em;
+        .level {
+            font-size: 1.5em;
+            font-weight: 800;
+        }
+    }
+    &:first-child {
+        margin-left: 0;
+    }
+    .buy {
+        width: 100%;
+        text-align: center;
+        padding: 0.7em 0;
+        -webkit-border-radius: 3px;
+                border-radius: 3px;
+    }
+}
+
+
+@each $color in $colors-index{
+    .color-#{index($colors-index,$color)}:before {
+        content: "";
+        height: 5px;
+        width: $price-width;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: $color;
+    }
+    .color-#{index($colors-index,$color)} .buy {
+            background-color: $color;
+            cursor: pointer;
+            color: #eee;
+            font-weight: 800;
+            &:hover {
+                background-color: desaturate($color,20%);
+            }
+        }
+    .color-#{index($colors-index,$color)} .main-des {
+            color: $color;
+        }
+
+}
