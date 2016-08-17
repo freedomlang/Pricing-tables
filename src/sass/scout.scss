@@ -3,7 +3,12 @@ $colors-index: #00CE7F #35A7FF #FF5964;
 $border-default: #eee;
 $price-width: 250px;
 
+body {
+    font-family: "Microsoft YaHei";
+}
+
 ul {
+    margin: 0;
     padding: 0;
 }
 
@@ -11,10 +16,20 @@ li {
     list-style: none;
 }
 
+.page-title {
+    text-align: center;
+    margin-bottom: 1em;
+    color: #2F3F4C;
+    font-size: 1.7em;
+    // font-weight: 100;
+}
+
 .scout {
-    h3 {
-        text-align: center;
-    }
+    width: 900px;
+    display: flex;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+    margin: 0 auto;
 }
 
 @each $color in $colors-index{
@@ -36,8 +51,8 @@ li {
     border-left: 1px solid $border-default;
     border-bottom: 1px solid $border-default;
     width: $price-width;
-    float: left;
-    margin-left: 10px;
+    // display: inline-block;
+    // margin-left: 10px;
     .price-container {
         position: absolute;
         top: 2em;
@@ -46,6 +61,7 @@ li {
             line-height: 1;
             font-size: 3em;
             position: relative;
+            color: #31414D;
             &:before{
                 content: attr(data-unit);
                 font-size: 0.5em;
@@ -72,7 +88,8 @@ li {
         margin-top: 3.3em;
         .level {
             font-size: 1.5em;
-            font-weight: 800;
+            font-weight: 900;
+            margin-bottom: 0.5em;
         }
     }
     &:first-child {
@@ -88,6 +105,22 @@ li {
 }
 
 
+.abstract {
+    font-style: italic;
+    margin-bottom: 1.5em;
+}
+
+.scout .feature {
+    ul {
+        margin-bottom: 1em;
+    }
+    .feature-item {
+    margin-top: 0.5em;
+    &:first-child {
+        // margin-top: 0;
+    }
+}}
+
 @each $color in $colors-index{
     .color-#{index($colors-index,$color)}:before {
         content: "";
@@ -95,7 +128,7 @@ li {
         width: $price-width;
         position: absolute;
         top: 0;
-        left: 0;
+        left: -1px;
         background-color: $color;
     }
     .color-#{index($colors-index,$color)} .buy {

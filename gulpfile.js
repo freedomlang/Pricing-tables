@@ -6,6 +6,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync').create();
 var cached = require('gulp-cached');
+var htmlmin = require('gulp-htmlmin');
 
 gulp.task('sass', function() {
     return gulp.src('src/sass/*.scss') // scss以组件的方式组合——只有一个主文件。
@@ -20,8 +21,19 @@ gulp.task('sass', function() {
 });
 
 gulp.task('html',function () {
+    var options = {
+        removeComments: true,//清除HTML注释
+        collapseWhitespace: true,//压缩HTML
+        collapseBooleanAttributes: true,//省略布尔属性的值 <input checked="true"/> ==> <input />
+        removeEmptyAttributes: true,//删除所有空格作属性值 <input id="" /> ==> <input />
+        removeScriptTypeAttributes: true,//删除<script>的type="text/javascript"
+        removeStyleLinkTypeAttributes: true,//删除<style>和<link>的type="text/css"
+        minifyJS: true,//压缩页面JS
+        minifyCSS: true//压缩页面CSS
+    };
     return gulp.src('src/**/*.html')
         .pipe(cached('html'))
+        .pipe(htmlmin(options))
         .pipe(gulp.dest('dist/'));
 })
 
